@@ -39,7 +39,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tamafx.DebugViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tamafx.DebugViewController">
    <children>
       <VBox layoutX="22.0" layoutY="64.0" prefHeight="250.0" prefWidth="291.0">
          <children>
@@ -64,7 +64,7 @@
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button fx:id="debugButton3" alignment="CENTER" mnemonicParsing="false" onAction="#handleButton3" prefHeight="94.0" prefWidth="274.0" text="Screen 3">
+            <Button fx:id="debugButton3" alignment="CENTER" mnemonicParsing="false" onAction="#handleButton3" prefHeight="94.0" prefWidth="274.0" text="Game Screen">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>

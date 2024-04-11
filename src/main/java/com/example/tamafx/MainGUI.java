@@ -1,4 +1,8 @@
 package com.example.tamafx;
+import com.almasb.fxgl.app.FXGLPane;
+import com.almasb.fxgl.app.GameApplication;
+import com.almasb.fxgl.app.GameSettings;
+import com.almasb.fxgl.entity.GameWorld;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -11,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -21,7 +26,6 @@ public class MainGUI extends Application {
     Scene scene, debugScene;
     Parent root, debugRoot;
 
-    @Override
     public void start(Stage stage) throws IOException {
         try {
             // Initialize primary window
@@ -30,7 +34,11 @@ public class MainGUI extends Application {
             scene = new Scene(root);
             window.setScene(scene);
             window.setTitle("Tamaslime!");
+            //window.setResizable(false);
+            //window.setMaximized(true);
+            // FXGLPane pane = GameApplication.embeddedLaunch(new GameApp());
             window.show();
+
 
             // Initialize debug window
             debugWindow = new Stage();
@@ -39,9 +47,12 @@ public class MainGUI extends Application {
             debugWindow.setScene(debugScene);
             debugWindow.setTitle("DEBUG WINDOW");
             debugWindow.show();
+
         }catch(Exception e) {
             e.printStackTrace();
         }
+
+        // Close condition event
         window.setOnCloseRequest(e -> {
             e.consume();
             closeProgram();
@@ -59,10 +70,13 @@ public class MainGUI extends Application {
         Scene newScene = new Scene(root);
         window.setScene(newScene);
     }
+    public static void gameScene() throws IOException {
+        GameScreen.display("Game");
+
+    }
 
     private void closeProgram() {
         System.out.println("Closing program...");
-        Platform.exit();
+        Platform.exit(); // Force closes all stages
     }
-
 }

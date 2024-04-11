@@ -6,7 +6,9 @@ import javafx.scene.control.Button;
 import java.io.IOException;
 
 public class BattleScreenController {
+    @FXML
     Button attackButton1, attackButton2, attackButton3, attackButton4;
+    @FXML
     Button menuButton1, menuButton2, menuButton3, menuButton4;
 
     // Attack Button handlers

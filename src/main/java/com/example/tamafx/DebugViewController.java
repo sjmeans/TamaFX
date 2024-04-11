@@ -31,6 +31,11 @@ public class DebugViewController {
     @FXML
     private void handleButton3(){
         System.out.println("3");
+        try {
+            MainGUI.gameScene();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     @FXML
     private void handleButton4(){
