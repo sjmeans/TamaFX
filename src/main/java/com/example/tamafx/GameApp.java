@@ -2,6 +2,8 @@ package com.example.tamafx;
 
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
+import com.almasb.fxgl.audio.Audio;
+import com.almasb.fxgl.audio.AudioType;
 import com.almasb.fxgl.audio.Music;
 import com.almasb.fxgl.audio.Sound;
 import com.almasb.fxgl.dsl.FXGL;
@@ -15,7 +17,7 @@ import javafx.util.Duration;
 
 import java.util.Map;
 
-import static com.almasb.fxgl.dsl.  FXGL.*;
+import static com.almasb.fxgl.dsl.FXGL.*;
 import static com.example.tamafx.EntityType.*;
 
 public class GameApp extends GameApplication {
@@ -44,9 +46,8 @@ public class GameApp extends GameApplication {
             spawnFadeIn("goodStuff", new SpawnData(random(0, getSettings().getWidth())), Duration.seconds(0.2));
             spawnFadeIn("badStuff", new SpawnData(random(0,getSettings().getWidth())), Duration.seconds(0.2));
         }, Duration.seconds(0.5));
-        //FXGL.play("bgm.mp3");
-        //FXGL.getAudioPlayer().
-        FXGL.getAssetLoader().loadSound("bgm.mp3");
+
+        getAudioPlayer().loopMusic(getAssetLoader().loadMusic("bgm.mp3"));
     }
 
     @Override

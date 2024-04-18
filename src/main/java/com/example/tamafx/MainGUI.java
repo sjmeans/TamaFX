@@ -1,30 +1,23 @@
 package com.example.tamafx;
-import com.almasb.fxgl.app.FXGLPane;
-import com.almasb.fxgl.app.GameApplication;
-import com.almasb.fxgl.app.GameSettings;
-import com.almasb.fxgl.entity.GameWorld;
+
+import com.almasb.fxgl.dsl.FXGL;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.Objects;
 
+//Primary JavaFX GUI initialization, must be launched via Starter class
 public class MainGUI extends Application {
 
-    static Stage window, debugWindow;
-    Scene scene, debugScene;
-    Parent root, debugRoot;
+    private static Stage window, debugWindow;
+    private static boolean gameFlag = false;
+    private Scene scene, debugScene;
+    private Parent root, debugRoot;
 
     public void start(Stage stage) throws IOException {
         try {
@@ -52,7 +45,7 @@ public class MainGUI extends Application {
             e.printStackTrace();
         }
 
-        // Close condition event
+        //Handle close request
         window.setOnCloseRequest(e -> {
             e.consume();
             closeProgram();
@@ -64,17 +57,28 @@ public class MainGUI extends Application {
      * @param sceneName input filename and extension of desired Scene in the resource folder.
      * @throws IOException
      */
+    //CAUSING OBJECT BLOAT, utilize singleton in some way
     public static void changeScene(String sceneName) throws IOException {
         FXMLLoader loader = new FXMLLoader(MainGUI.class.getResource(sceneName));
         Parent root = loader.load();
         Scene newScene = new Scene(root);
         window.setScene(newScene);
+        if (sceneName.equals("GameScreen.fxml"))
+            gameFlag = true;
+        if (!sceneName.equals("GameScreen.fxml") && gameFlag){
+            FXGL.getAudioPlayer().stopAllSoundsAndMusic();
+            GameApp.embeddedShutdown();
+            gameFlag = false;
+        }
+        System.out.printf("Loader: %s%nRoot: %s%nScene: %s%n", loader, root, newScene);
     }
+    // TEMPORARY method to display game scene via debug screen handling
+    // Maybe use a javaFX empty scene with a controller which extends initializable and handle all the current gamescreen logic there?
     public static void gameScene() throws IOException {
-        GameScreen.display("Game");
-
+        GameScreen.display(window.getTitle());
     }
 
+    // Placeholder code to execute on close request handling
     private void closeProgram() {
         System.out.println("Closing program...");
         Platform.exit(); // Force closes all stages

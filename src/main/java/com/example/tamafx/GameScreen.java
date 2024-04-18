@@ -1,34 +1,40 @@
 package com.example.tamafx;
 
+import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.app.FXGLPane;
 import com.almasb.fxgl.app.GameApplication;
-import com.almasb.fxgl.dsl.FXGL;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+// DEPRECATED
 
 public class GameScreen {
     public static void display(String title){
+        //Initialize JavaFX components
         Stage window = new Stage();
+        AnchorPane layout = new AnchorPane();
+        FXGLPane pane = GameApplication.embeddedLaunch(new GameApp());
+
+        layout.getChildren().addAll(pane);
+        Scene scene = new Scene(layout);
 
         window.setTitle(title);
-        FXGLPane pane = GameApplication.embeddedLaunch(new GameApp());
-        AnchorPane layout = new AnchorPane();
-        layout.getChildren().addAll(pane);
-
-        Scene scene = new Scene(layout);
         window.setScene(scene);
+
+        //Handle close request
         window.setOnCloseRequest(e -> {
             e.consume();
-            //GameApplication.embeddedShutdown();
-            FXGL.getGameController().exit();
-            window.close();
+            try {
+                FXGL.getAudioPlayer().stopAllSoundsAndMusic();
+                GameApp.embeddedShutdown();
+                window.close();
+            } catch (Exception exception) {
+                throw new RuntimeException(exception);
+            }
         });
+
+        //Display finalized window element
         window.showAndWait();
     }
 }

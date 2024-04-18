@@ -1,12 +1,12 @@
 package com.example.tamafx;
 
-import com.sun.tools.javac.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 import java.io.IOException;
 
 public class DebugViewController {
+    @FXML
     Button debugButton1, debugButton2, debugButton3, debugButton4;
 
     // Debug Button handlers
@@ -40,5 +40,11 @@ public class DebugViewController {
     @FXML
     private void handleButton4(){
         System.out.println("4");
+        try {
+            // If scene is currently on GameScreen it will have gamespeed bug
+            MainGUI.changeScene("GameScreen.fxml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
