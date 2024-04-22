@@ -1,4 +1,4 @@
-package com.example.tamafx;
+package com.example.tamafx.FXGLApp;
 
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.dsl.components.OffscreenCleanComponent;
@@ -10,9 +10,6 @@ import com.almasb.fxgl.entity.Spawns;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
-
-import static com.almasb.fxgl.dsl.FXGLForKtKt.runOnce;
 
 public class BasicFactory implements EntityFactory {
     @Spawns("player")

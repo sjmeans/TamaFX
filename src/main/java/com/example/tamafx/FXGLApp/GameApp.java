@@ -1,34 +1,29 @@
-package com.example.tamafx;
+package com.example.tamafx.FXGLApp;
 
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
-import com.almasb.fxgl.audio.Audio;
-import com.almasb.fxgl.audio.AudioType;
-import com.almasb.fxgl.audio.Music;
-import com.almasb.fxgl.audio.Sound;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.SpawnData;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.stage.Screen;
 import javafx.util.Duration;
 
 import java.util.Map;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
-import static com.example.tamafx.EntityType.*;
+import static com.example.tamafx.FXGLApp.EntityType.*;
 
 public class GameApp extends GameApplication {
     private Entity player;
 
     @Override
     protected void initInput() {
-        onKey(KeyCode.A, () -> player.translateX(-25));
-        onKey(KeyCode.D, () -> player.translateX(25));
-        onKey(KeyCode.W, () -> player.translateY(-25));
-        onKey(KeyCode.S, () -> player.translateY(25));
+        onKey(KeyCode.A, () -> player.translateX(-15));
+        onKey(KeyCode.D, () -> player.translateX(15));
+        onKey(KeyCode.W, () -> player.translateY(-15));
+        onKey(KeyCode.S, () -> player.translateY(15));
     }
 
     @Override

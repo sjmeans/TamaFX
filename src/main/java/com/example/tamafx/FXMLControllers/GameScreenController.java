@@ -1,8 +1,8 @@
-package com.example.tamafx;
+package com.example.tamafx.FXMLControllers;
 
 import com.almasb.fxgl.app.FXGLPane;
 import com.almasb.fxgl.app.GameApplication;
-import com.almasb.fxgl.dsl.FXGL;
+import com.example.tamafx.FXGLApp.GameApp;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;

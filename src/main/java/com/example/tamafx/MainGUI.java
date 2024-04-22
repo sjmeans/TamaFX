@@ -1,6 +1,8 @@
 package com.example.tamafx;
 
 import com.almasb.fxgl.dsl.FXGL;
+import com.example.tamafx.FXGLApp.GameApp;
+import com.example.tamafx.Deprecated.GameScreen;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -57,30 +59,34 @@ public class MainGUI extends Application {
      * @param sceneName input filename and extension of desired Scene in the resource folder.
      * @throws IOException
      */
-    //CAUSING OBJECT BLOAT, utilize singleton in some way
+    //CAUSING OBJECT BLOAT, may utilize singleton in some way
     public static void changeScene(String sceneName) throws IOException {
+        if(gameFlag) closeGameApp(); // If game is running close gameApp to avoid reinstantiation bugs
+
         FXMLLoader loader = new FXMLLoader(MainGUI.class.getResource(sceneName));
         Parent root = loader.load();
         Scene newScene = new Scene(root);
         window.setScene(newScene);
-        if (sceneName.equals("GameScreen.fxml"))
+
+        // Handle issues with terminating static game client
+        if (sceneName.equals("GameScreen.fxml") && !gameFlag) {
             gameFlag = true;
+        }
         if (!sceneName.equals("GameScreen.fxml") && gameFlag){
-            FXGL.getAudioPlayer().stopAllSoundsAndMusic();
-            GameApp.embeddedShutdown();
+            closeGameApp();
             gameFlag = false;
         }
+
         System.out.printf("Loader: %s%nRoot: %s%nScene: %s%n", loader, root, newScene);
     }
-    // TEMPORARY method to display game scene via debug screen handling
-    // Maybe use a javaFX empty scene with a controller which extends initializable and handle all the current gamescreen logic there?
-    public static void gameScene() throws IOException {
-        GameScreen.display(window.getTitle());
+    public static void closeGameApp(){
+        FXGL.getAudioPlayer().stopAllSoundsAndMusic();
+        GameApp.embeddedShutdown();
     }
 
     // Placeholder code to execute on close request handling
     private void closeProgram() {
         System.out.println("Closing program...");
-        Platform.exit(); // Force closes all stages
+        Platform.exit(); // Force close JavaFX program
     }
 }
