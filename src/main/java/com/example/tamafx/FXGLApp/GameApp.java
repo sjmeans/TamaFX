@@ -5,6 +5,7 @@ import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.SpawnData;
+import com.example.tamafx.MainGUI;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -20,10 +21,10 @@ public class GameApp extends GameApplication {
 
     @Override
     protected void initInput() {
-        onKey(KeyCode.A, () -> player.translateX(-15));
-        onKey(KeyCode.D, () -> player.translateX(15));
-        onKey(KeyCode.W, () -> player.translateY(-15));
-        onKey(KeyCode.S, () -> player.translateY(15));
+        onKey(KeyCode.A, () -> player.translateX(-10));
+        onKey(KeyCode.D, () -> player.translateX(10));
+        onKey(KeyCode.W, () -> player.translateY(-10));
+        onKey(KeyCode.S, () -> player.translateY(10));
     }
 
     @Override
@@ -31,15 +32,17 @@ public class GameApp extends GameApplication {
         settings.setTitle("TamaEpic");
         settings.setVersion("0.1");
         settings.setFullScreenFromStart(true);
+        settings.setWidth(MainGUI.getWindowSize("x"));
+        settings.setHeight(MainGUI.getWindowSize("y"));
     }
 
     @Override
     protected void initGame() {
         getGameWorld().addEntityFactory(new BasicFactory());
-        player = spawn("player", 450, 450);
+        player = spawn("player", getAppWidth() / 2.0 - 32, getAppHeight() - 128);
         run(() -> {
-            spawnFadeIn("goodStuff", new SpawnData(random(0, getSettings().getWidth())), Duration.seconds(0.2));
-            spawnFadeIn("badStuff", new SpawnData(random(0,getSettings().getWidth())), Duration.seconds(0.2));
+            spawnFadeIn("goodStuff", new SpawnData(random(0, getSettings().getWidth())), Duration.seconds(0.3));
+            spawnFadeIn("badStuff", new SpawnData(random(0,getSettings().getWidth())), Duration.seconds(0.3));
         }, Duration.seconds(0.5));
 
         getAudioPlayer().loopMusic(getAssetLoader().loadMusic("bgm.mp3"));
@@ -66,8 +69,8 @@ public class GameApp extends GameApplication {
         addUINode(text);
 
         Text textPixels = new Text();
-        textPixels.setTranslateX(50); // x = 50
-        textPixels.setTranslateY(100); // y = 100
+        textPixels.setTranslateX(50);
+        textPixels.setTranslateY(100);
 
         FXGL.getGameScene().addUINode(textPixels); // add to the scene graph
     }

@@ -2,12 +2,16 @@ package com.example.tamafx.FXMLControllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 
 public class BattleScreenController {
     @FXML
     Button attackButton1, attackButton2, attackButton3, attackButton4;
     @FXML
     Button menuButton1, menuButton2, menuButton3, menuButton4;
+    @FXML
+    ImageView slimeRed, slimeEnemy;
+
 
     // Attack Button handlers
     @FXML

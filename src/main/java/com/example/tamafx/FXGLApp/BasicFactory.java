@@ -16,7 +16,7 @@ public class BasicFactory implements EntityFactory {
     public Entity newPlayer(SpawnData data){
         return FXGL.entityBuilder(data)
                 .type(EntityType.PLAYER)
-                .viewWithBBox("slime.png")
+                .viewWithBBox("slimeRed.png")
                 .collidable()
                 .build();
     }

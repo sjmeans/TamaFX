@@ -29,9 +29,6 @@ public class MainGUI extends Application {
             scene = new Scene(root);
             window.setScene(scene);
             window.setTitle("Tamaslime!");
-            //window.setResizable(false);
-            //window.setMaximized(true);
-            // FXGLPane pane = GameApplication.embeddedLaunch(new GameApp());
             window.show();
 
 
@@ -88,5 +85,12 @@ public class MainGUI extends Application {
     private void closeProgram() {
         System.out.println("Closing program...");
         Platform.exit(); // Force close JavaFX program
+    }
+    public static int getWindowSize(String axis) {
+        if(axis.equals("x"))
+            return (int) window.getWidth();
+        if(axis.equals("y"))
+            return (int) window.getHeight();
+        else return 0;
     }
 }
