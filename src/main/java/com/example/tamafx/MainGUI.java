@@ -2,12 +2,12 @@ package com.example.tamafx;
 
 import com.almasb.fxgl.dsl.FXGL;
 import com.example.tamafx.FXGLApp.GameApp;
-import com.example.tamafx.Deprecated.GameScreen;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,7 +18,7 @@ public class MainGUI extends Application {
 
     private static Stage window, debugWindow;
     private static boolean gameFlag = false;
-    private Scene scene, debugScene;
+    private static Scene scene, debugScene;
     private Parent root, debugRoot;
 
     public void start(Stage stage) throws IOException {
@@ -29,6 +29,9 @@ public class MainGUI extends Application {
             scene = new Scene(root);
             window.setScene(scene);
             window.setTitle("Tamaslime!");
+            //ClassLoader.getSystemResource("/assets/textures/slimeRed.png");
+            window.getIcons().add(new Image("/assets/textures/slimeRed.png"));
+            //window.setResizable(false);
             window.show();
 
 
@@ -56,7 +59,7 @@ public class MainGUI extends Application {
      * @param sceneName input filename and extension of desired Scene in the resource folder.
      * @throws IOException
      */
-    //CAUSING OBJECT BLOAT, may utilize singleton in some way
+    //Causing object bloat, may utilize singleton in some way
     public static void changeScene(String sceneName) throws IOException {
         if(gameFlag) closeGameApp(); // If game is running close gameApp to avoid reinstantiation bugs
 
@@ -87,10 +90,14 @@ public class MainGUI extends Application {
         Platform.exit(); // Force close JavaFX program
     }
     public static int getWindowSize(String axis) {
-        if(axis.equals("x"))
-            return (int) window.getWidth();
-        if(axis.equals("y"))
-            return (int) window.getHeight();
+        if(axis.equals("x")) {
+            //System.out.println("Width " + scene.getWidth());
+            return (int) scene.getWidth();
+        }
+        if(axis.equals("y")) {
+            //System.out.println("Height " + scene.getHeight());
+            return (int) scene.getHeight();
+        }
         else return 0;
     }
 }

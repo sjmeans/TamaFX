@@ -21,17 +21,38 @@ public class GameApp extends GameApplication {
 
     @Override
     protected void initInput() {
-        onKey(KeyCode.A, () -> player.translateX(-10));
-        onKey(KeyCode.D, () -> player.translateX(10));
-        onKey(KeyCode.W, () -> player.translateY(-10));
-        onKey(KeyCode.S, () -> player.translateY(10));
+        onKey(KeyCode.A, () -> {
+            if(player.getPosition().getX() <= 0) {
+                player.translateX(0);
+            }
+            else player.translateX(-10);
+        });
+        onKey(KeyCode.D, () -> {
+            if (player.getPosition().getX() >= getSettings().getWidth() - player.getWidth()) {
+                player.translateX(0);
+            }
+            else player.translateX(10);
+        });
+        onKey(KeyCode.W, () -> {
+            if (player.getPosition().getY() <= 0) {
+                player.translateY(0);
+            }
+            else player.translateY(-10);
+        });
+        onKey(KeyCode.S, () -> {
+            if(player.getPosition().getY() >= getSettings().getHeight() - player.getHeight()) {
+                player.translateY(0);
+            }
+            else player.translateY(10);
+        });
+
+        //onKey(KeyCode.Q, () -> System.out.println(getSettings().getWidth() + "\n"+ getSettings().getHeight()));
     }
 
     @Override
     protected void initSettings(GameSettings settings) {
-        settings.setTitle("TamaEpic");
+        settings.setTitle("TamaGamers");
         settings.setVersion("0.1");
-        settings.setFullScreenFromStart(true);
         settings.setWidth(MainGUI.getWindowSize("x"));
         settings.setHeight(MainGUI.getWindowSize("y"));
     }
@@ -42,7 +63,7 @@ public class GameApp extends GameApplication {
         player = spawn("player", getAppWidth() / 2.0 - 32, getAppHeight() - 128);
         run(() -> {
             spawnFadeIn("goodStuff", new SpawnData(random(0, getSettings().getWidth())), Duration.seconds(0.3));
-            spawnFadeIn("badStuff", new SpawnData(random(0,getSettings().getWidth())), Duration.seconds(0.3));
+            spawnFadeIn("badStuff", new SpawnData(random(0,getSettings().getWidth())), Duration.seconds(0.6));
         }, Duration.seconds(0.5));
 
         getAudioPlayer().loopMusic(getAssetLoader().loadMusic("bgm.mp3"));

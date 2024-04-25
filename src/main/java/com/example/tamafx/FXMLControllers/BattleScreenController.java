@@ -12,7 +12,6 @@ public class BattleScreenController {
     @FXML
     ImageView slimeRed, slimeEnemy;
 
-
     // Attack Button handlers
     @FXML
     private void handleAttackButton1(){

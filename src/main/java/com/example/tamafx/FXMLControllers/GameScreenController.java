@@ -12,14 +12,11 @@ import java.util.ResourceBundle;
 
 public class GameScreenController implements Initializable {
     @FXML
-    public AnchorPane anchorPane;
-    public FXGLPane bodyPane;
+    private AnchorPane anchorPane;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        bodyPane = GameApplication.embeddedLaunch(new GameApp());
-        System.out.println(bodyPane.isVisible());
-        anchorPane.getChildren().add(bodyPane);
-
+        FXGLPane embeddedGamePane = GameApplication.embeddedLaunch(new GameApp());
+        anchorPane.getChildren().add(embeddedGamePane);
     }
 }

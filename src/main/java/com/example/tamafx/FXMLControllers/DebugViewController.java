@@ -33,7 +33,6 @@ public class DebugViewController {
     private void handleButton3(){
         System.out.println("3");
         try {
-            // If scene is currently on GameScreen it will have gamespeed bug
             MainGUI.changeScene("GameScreen.fxml");
         } catch (IOException e) {
             e.printStackTrace();
